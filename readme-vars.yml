@@ -30,6 +30,9 @@ param_ports:
   - { external_port: "3001", internal_port: "3001", port_desc: "Mullvad Browser GUI HTTPS." }
 custom_params:
   - { name: "shm-size", name_compose: "shm_size", value: "1gb",desc: "This is needed for any modern website to function like youtube." }
+cap_add_param: true
+cap_add_param_vars:
+  - { cap_add_var: "NET_ADMIN" }
 opt_param_usage_include_env: true
 opt_param_env_vars:
   - { env_var: "LOCAL_NET", env_value: "192.168.0.0/16", desc: "If using a VPN, set this to your local LAN IP range using CIDR notation. Without it you will be unable to access the web interface. If you have multiple ranges or a complex LAN setup you will need to manage this yourself in the wg0.conf, see the App Setup section for details."}
@@ -47,7 +50,7 @@ app_setup_block: |
 
   ## VPN Connectivity
 
-  Generate a Wireguard conf from your VPN provider and copy it into the /config mount with a name of `wg0.conf`. If a valid conf is found at startup, the container will connect to the VPN and route all traffic over it.
+  Generate a Wireguard conf from your VPN provider and copy it into the /config mount with a name of `wg0.conf`. If a valid conf is found at startup, the container will connect to the VPN and route all traffic over it. This container is *not* designed for routing other containers traffic and should only be used standlone.
 
   ## Maintaining local access to attached services
 

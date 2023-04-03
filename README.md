@@ -67,7 +67,7 @@ The application can be accessed at:
 
 ## VPN Connectivity
 
-Generate a Wireguard conf from your VPN provider and copy it into the /config mount with a name of `wg0.conf`. If a valid conf is found at startup, the container will connect to the VPN and route all traffic over it.
+Generate a Wireguard conf from your VPN provider and copy it into the /config mount with a name of `wg0.conf`. If a valid conf is found at startup, the container will connect to the VPN and route all traffic over it. This container is *not* designed for routing other containers traffic and should only be used standlone.
 
 ## Maintaining local access to attached services
 
@@ -127,6 +127,8 @@ services:
   mullvad-browser:
     image: lscr.io/linuxserver/mullvad-browser:latest
     container_name: mullvad-browser
+    cap_add:
+      - NET_ADMIN
     security_opt:
       - seccomp:unconfined #optional
     environment:
@@ -148,6 +150,7 @@ services:
 ```bash
 docker run -d \
   --name=mullvad-browser \
+  --cap-add=NET_ADMIN \
   --security-opt seccomp=unconfined `#optional` \
   -e PUID=1000 \
   -e PGID=1000 \
@@ -177,6 +180,10 @@ Container images are configured using parameters passed at runtime (such as thos
 | `-v /config` | Users home directory in the container, stores local files and settings |
 | `--shm-size=` | This is needed for any modern website to function like youtube. |
 | `--security-opt seccomp=unconfined` | For Docker Engine only, many modern gui apps need this to function on older hosts as syscalls are unknown to Docker. |
+
+### Portainer notice
+
+This image utilises `cap_add` or `sysctl` to work properly. This is not implemented properly in some versions of Portainer, thus this image may not work if deployed through Portainer.
 
 ## Environment variables from files (Docker secrets)
 

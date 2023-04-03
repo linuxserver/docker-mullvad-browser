@@ -26,7 +26,6 @@ if [[ -f /config/wg0.conf ]]; then
     fi
     # If user has supplied a Wireguard conf but no LOCAL_NET we assume they're handling the rules manually
 else
-    echo "**** No Wireguard conf found, VPN will not be enabled. ****"
     printf %s "false" > /run/s6/container_environment/USE_WIREGUARD
 fi
 

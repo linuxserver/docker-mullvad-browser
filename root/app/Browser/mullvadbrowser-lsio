@@ -1,0 +1,2 @@
+#!/bin/bash
+/app/Browser/mullvadbrowser -profile $HOME/lsio ${HOMEPAGE}

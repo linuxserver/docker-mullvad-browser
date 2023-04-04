@@ -51,6 +51,8 @@ RUN \
   tar xf \
     /tmp/mullvad.tar.xz -C \
     /app --strip-components=1 && \
+  mkdir /app/Data && \
+  chmod 777 /app/Data && \
   find /app -perm 700 -exec chmod 755 {} + && \
   find /app -perm 600 -exec chmod 644 {} + && \
   sed -i 's|</applications>|  <application title="Mullvad Browser" type="normal">\n    <maximized>yes</maximized>\n  </application>\n</applications>|' /etc/xdg/openbox/rc.xml && \

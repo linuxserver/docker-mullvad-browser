@@ -51,8 +51,8 @@ RUN \
   tar xf \
     /tmp/mullvad.tar.xz -C \
     /app --strip-components=1 && \
-  find /app -perm 700 -exec chmod 777 {} + && \
-  find /app -perm 600 -exec chmod 666 {} + && \
+  find /app -perm 700 -exec chmod 755 {} + && \
+  find /app -perm 600 -exec chmod 644 {} + && \
   sed -i 's|</applications>|  <application title="Mullvad Browser" type="normal">\n    <maximized>yes</maximized>\n  </application>\n</applications>|' /etc/xdg/openbox/rc.xml && \
   echo "**** cleanup ****" && \
   rm -rf \

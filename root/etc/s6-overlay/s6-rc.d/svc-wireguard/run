@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [[ ${USE_WIREGUARD,,} == "false" ]]; then
+    echo "**** No Wireguard conf found, VPN will not be enabled. ****"
+else
+    wg-quick up wg0
+fi

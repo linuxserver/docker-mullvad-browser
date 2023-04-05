@@ -1,0 +1,34 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+if [[ -f /config/wg0.conf ]]; then
+    echo "Uname info: $(uname -a)"
+    # check for wireguard module
+    ip link del dev test 2>/dev/null
+    if ip link add dev test type wireguard; then
+        ip link del dev test
+    else
+        echo "**** The wireguard module is not active or you do not have the correct Capabilities set. If you believe that your kernel should have wireguard support already, make sure that it is activated via modprobe! ****"
+        sleep infinity
+    fi
+    # prepare symlinks
+    rm -rf /etc/wireguard
+    mkdir -p /etc/wireguard
+    ln -s /config/wg0.conf /etc/wireguard/wg0.conf
+    # sed in PostUp/PreDown rules for local access based on user-supplied envs
+    if [[ -n ${LOCAL_NET} ]]; then
+        if ! grep -iq 'PostUp' /config/wg0.conf; then
+            sed -i "/DNS =.*/a\PostUp = DROUTE=\$(ip route | grep default | awk '{print \$3}'); HOMENET=${LOCAL_NET}; ip route add \$HOMENET via \$DROUTE;iptables -I OUTPUT -d \$HOMENET -j ACCEPT; iptables -A OUTPUT ! -o %i -m mark ! --mark \$(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT" /config/wg0.conf
+        fi
+        if ! grep -iq 'PreDown' /config/wg0.conf; then
+            sed -i "/PostUp =.*/a\PreDown = HOMENET=${LOCAL_NET}; ip route del \$HOMENET via \$DROUTE; iptables -D OUTPUT ! -o %i -m mark ! --mark \$(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT; iptables -D OUTPUT -d \$HOMENET -j ACCEPT" /config/wg0.conf
+        fi
+    fi
+    # If user has supplied a Wireguard conf but no LOCAL_NET we assume they're handling the rules manually
+else
+    printf %s "false" > /run/s6/container_environment/USE_WIREGUARD
+fi
+
+# permissions
+lsiown -R abc:abc \
+    /config

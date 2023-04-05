@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Default folder
+if [ ! -f $HOME/lsio ]; then
+  mkdir $HOME/lsio
+fi
+
+# Start app
+/app/Browser/mullvadbrowser-lsio

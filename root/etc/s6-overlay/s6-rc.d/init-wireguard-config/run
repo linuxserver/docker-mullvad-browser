@@ -24,6 +24,7 @@ if [[ -f /config/wg0.conf ]]; then
             sed -i "/PostUp =.*/a\PreDown = HOMENET=${LOCAL_NET}; ip route del \$HOMENET via \$DROUTE; iptables -D OUTPUT ! -o %i -m mark ! --mark \$(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT; iptables -D OUTPUT -d \$HOMENET -j ACCEPT" /config/wg0.conf
         fi
     fi
+    rm -rf /run/s6/container_environment/USE_WIREGUARD
     # If user has supplied a Wireguard conf but no LOCAL_NET we assume they're handling the rules manually
 else
     printf %s "false" > /run/s6/container_environment/USE_WIREGUARD

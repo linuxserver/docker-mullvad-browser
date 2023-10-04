@@ -34,7 +34,7 @@ RUN \
     | jq -r .name | awk -F ' ' '{print $3}'); \
   fi && \
   MULLVAD_URL=$(curl -sX GET "https://api.github.com/repos/mullvad/mullvad-browser/releases" \
-  | jq -r ".[] | select(.name==\"Mullvad Browser ${MULLVAD_VERSION}\") | .assets | .[] | select(.name |contains (\"linux64\")) | select(.name |contains (\"tar.xz\")) | .browser_download_url") && \
+  | jq -r ".[] | select(.name==\"Mullvad Browser ${MULLVAD_VERSION}\") | .assets | .[] | select(.name |contains (\"linux64\")) | select(.name |contains (\"tar.xz\")) | select(.name |contains (\"asc\")| not) | .browser_download_url") && \
   curl -s -o \
     /tmp/mullvad.tar.xz -L \
     "${MULLVAD_URL}" && \

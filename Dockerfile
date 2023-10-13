@@ -33,14 +33,12 @@ RUN \
     MULLVAD_VERSION=$(curl -sX GET "https://api.github.com/repos/mullvad/mullvad-browser/releases/latest" \
     | jq -r .name | awk -F ' ' '{print $3}'); \
   fi && \
-  MULLVAD_URL=$(curl -sX GET "https://api.github.com/repos/mullvad/mullvad-browser/releases" \
-  | jq -r ".[] | select(.name==\"Mullvad Browser ${MULLVAD_VERSION}\") | .assets | .[] | select(.name |contains (\"linux64\")) | select(.name |contains (\"tar.xz\")) | select(.name |contains (\"asc\")| not) | .browser_download_url") && \
   curl -s -o \
     /tmp/mullvad.tar.xz -L \
-    "${MULLVAD_URL}" && \
+    "https://github.com/mullvad/mullvad-browser/releases/download/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz" && \
   curl -s -o \
     /tmp/mullvad.tar.xz.asc -L \
-    "${MULLVAD_URL}.asc" && \
+    "https://github.com/mullvad/mullvad-browser/releases/download/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz.asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
   gpg --batch -q --recv-keys "$TORPROJECT_RELEASE_GPG_KEY" && \
   gpg --batch -q --recv-keys "$MULLVAD_RELEASE_GPG_KEY" && \

@@ -35,10 +35,10 @@ RUN \
   fi && \
   curl -s -o \
     /tmp/mullvad.tar.xz -L \
-    "https://github.com/mullvad/mullvad-browser/releases/download/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz" && \
+    "https://cdn.mullvad.net/browser/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz" && \
   curl -s -o \
     /tmp/mullvad.tar.xz.asc -L \
-    "https://github.com/mullvad/mullvad-browser/releases/download/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz.asc" && \
+    "https://cdn.mullvad.net/browser/${MULLVAD_VERSION}/mullvad-browser-linux-x86_64-${MULLVAD_VERSION}.tar.xz.asc" && \
   export GNUPGHOME="$(mktemp -d)" && \
   gpg --batch -q --recv-keys "$TORPROJECT_RELEASE_GPG_KEY" && \
   gpg --batch -q --recv-keys "$MULLVAD_RELEASE_GPG_KEY" && \

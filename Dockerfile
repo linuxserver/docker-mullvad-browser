@@ -13,6 +13,10 @@ ENV MULLVAD_RELEASE_GPG_KEY="A1198702FC3E0A09A9AE5B75D5A1D4F266DE8DDF"
 ENV TORPROJECT_RELEASE_GPG_KEY="EF6E286DDA85EA2A4BA7DE684E2C6E8793298290"
 
 RUN \
+  echo "**** add icon ****" && \
+  curl -o \
+    /kclient/public/icon.png \
+    https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mullvad-browser-logo.png && \
   echo "**** install packages ****" && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
@@ -53,7 +57,6 @@ RUN \
   chmod 777 /app/Data && \
   find /app -perm 700 -exec chmod 755 {} + && \
   find /app -perm 600 -exec chmod 644 {} + && \
-  sed -i 's|</applications>|  <application title="Mullvad Browser" type="normal">\n    <maximized>yes</maximized>\n  </application>\n</applications>|' /etc/xdg/openbox/rc.xml && \
   echo "**** cleanup ****" && \
   rm -rf \
     /tmp/* \

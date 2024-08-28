@@ -152,7 +152,7 @@ services:
       - TZ=Etc/UTC
       - LOCAL_NET=192.168.0.0/16 #optional
     volumes:
-      - /path/to/config:/config
+      - /path/to/mullvad-browser/config:/config
     ports:
       - 3000:3000
       - 3001:3001
@@ -173,7 +173,7 @@ docker run -d \
   -e LOCAL_NET=192.168.0.0/16 `#optional` \
   -p 3000:3000 \
   -p 3001:3001 \
-  -v /path/to/config:/config \
+  -v /path/to/mullvad-browser/config:/config \
   --shm-size="1gb" \
   --restart unless-stopped \
   lscr.io/linuxserver/mullvad-browser:latest
@@ -360,5 +360,6 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **28.08.24:** - Rebase to noble.
 * **10.02.24:** - Update Readme with new env vars and ingest proper PWA icon.
 * **03.04.23:** - Initial release.

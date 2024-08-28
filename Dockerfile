@@ -17,8 +17,11 @@ RUN \
   curl -o \
     /kclient/public/icon.png \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mullvad-browser-logo.png && \
-  echo "**** install packages ****" && \
+  echo "**** install build dependencies ****" && \
   apt-get update && \
+  apt-get install -y --no-install-recommends \
+    make && \
+  echo "**** install runtime packages ****" && \
   apt-get install -y --no-install-recommends \
     fontconfig \
     gnupg \
@@ -28,9 +31,22 @@ RUN \
     libdbus-glib-1-2 \
     libgtk-3-0 \
     net-tools \
-    openresolv \
     wireguard \
     xz-utils && \
+  echo "**** install openresolv ****" && \
+  OPENRESOLV_VERSION=$(curl -sX GET "https://api.github.com/repos/NetworkConfiguration/openresolv/releases/latest" \
+    | jq -r '.tag_name') && \
+  curl -s -o \
+    /tmp/openresolv.tar.gz -L \
+    "https://github.com/NetworkConfiguration/openresolv/archive/refs/tags/${OPENRESOLV_VERSION}.tar.gz" && \
+  mkdir -p /tmp/openresolv && \
+  tar xf \
+    /tmp/openresolv.tar.gz -C \
+    /tmp/openresolv --strip-components=1 && \
+  cd /tmp/openresolv && \
+  ./configure && \
+  make && \
+  make install && \
   echo "**** install mullvad browser ****" && \
   mkdir -p /app && \
   if [ -z ${MULLVAD_VERSION+x} ]; then \
@@ -59,6 +75,8 @@ RUN \
   find /app -perm 600 -exec chmod 644 {} + && \
   printf "Linuxserver.io version: ${VERSION}\nBuild-date: ${BUILD_DATE}" > /build_version && \
   echo "**** cleanup ****" && \
+  apt-get purge -y --autoremove \
+    make && \
   rm -rf \
     /tmp/* \
     /var/lib/apt/lists/* \

@@ -26,7 +26,7 @@ custom_params:
   - { name: "shm-size", name_compose: "shm_size", value: "1gb",desc: "This is needed for any modern website to function like youtube." }
 cap_add_param: true
 cap_add_param_vars:
-  - { cap_add_var: "NET_ADMIN" }
+  - { cap_add_var: "NET_ADMIN", desc: "Neccessary for Wireguard to create its VPN interface." }
 opt_param_usage_include_env: true
 opt_param_env_vars:
   - { env_var: "LOCAL_NET", env_value: "192.168.0.0/16", desc: "If using a VPN, set this to your local LAN IP range using CIDR notation. Without it you will be unable to access the web interface. If you have multiple ranges or a complex LAN setup you will need to manage this yourself in the wg0.conf, see the App Setup section for details."}

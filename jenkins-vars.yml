@@ -2,13 +2,15 @@
 
 # jenkins variables
 project_name: docker-mullvad-browser
-external_type: na
-custom_version_command: "curl -sX GET \"https://api.github.com/repos/mullvad/mullvad-browser/releases/latest\" | jq -r .name | awk -F ' ' '{print $3}'"
+external_type: github_stable
 release_type: stable
 release_tag: latest
 ls_branch: main
 build_armhf: false
 repo_vars:
+  - EXT_GIT_BRANCH = 'main'
+  - EXT_USER = 'mullvad'
+  - EXT_REPO = 'mullvad-browser'
   - BUILD_VERSION_ARG = 'MULLVAD_VERSION'
   - LS_USER = 'linuxserver'
   - LS_REPO = 'docker-mullvad-browser'

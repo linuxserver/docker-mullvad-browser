@@ -51,7 +51,7 @@ RUN \
   mkdir -p /app && \
   if [ -z ${MULLVAD_VERSION+x} ]; then \
     MULLVAD_VERSION=$(curl -sX GET "https://api.github.com/repos/mullvad/mullvad-browser/releases/latest" \
-    | jq -r .name | awk -F ' ' '{print $3}'); \
+    | jq -r .tag_name); \
   fi && \
   curl -s -o \
     /tmp/mullvad.tar.xz -L \

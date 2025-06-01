@@ -1073,7 +1073,7 @@ nan                                                                           2.
 ncurses-base                                                                  6.4+20240113-1ubuntu2                   deb                         
 ncurses-bin                                                                   6.4+20240113-1ubuntu2                   deb                         
 negotiator                                                                    0.6.3                                   npm                         
-net-tools                                                                     2.10-0.1ubuntu4                         deb                         
+net-tools                                                                     2.10-0.1ubuntu4.4                       deb                         
 netbase                                                                       6.4                                     deb                         
 netcat-openbsd                                                                1.226-1ubuntu2                          deb                         
 nginx                                                                         1.24.0-2ubuntu7.3                       deb                         

@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:ubuntunoble
+FROM ghcr.io/linuxserver/baseimage-selkies:ubuntunoble
 
 # set version label
 ARG BUILD_DATE
@@ -15,7 +15,7 @@ ENV TORPROJECT_RELEASE_GPG_KEY="EF6E286DDA85EA2A4BA7DE684E2C6E8793298290"
 RUN \
   echo "**** add icon ****" && \
   curl -o \
-    /kclient/public/icon.png \
+    /usr/share/selkies/www/icon.png \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/mullvad-browser-logo.png && \
   echo "**** install build dependencies ****" && \
   apt-get update && \

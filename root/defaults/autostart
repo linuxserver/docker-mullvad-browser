@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Default folder
-if [ ! -f $HOME/lsio ]; then
-  mkdir $HOME/lsio
+if [[ ! -d "${HOME}/lsio" ]]; then
+  mkdir "${HOME}/lsio"
 fi
 
 # Start app

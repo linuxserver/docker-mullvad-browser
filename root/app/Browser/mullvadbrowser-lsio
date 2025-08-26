@@ -1,2 +1,9 @@
 #!/bin/bash
-/app/Browser/mullvadbrowser -profile $HOME/lsio ${HOMEPAGE}
+
+if [[ ! -d "${HOME}/lsio" ]]; then
+    /app/Browser/mullvadbrowser -CreateProfile "lsio ${HOME}/lsio"
+fi
+
+echo 'user_pref("security.sandbox.warn_unprivileged_namespaces", false);' >> "${HOME}/lsio/prefs.js"
+
+/app/Browser/mullvadbrowser -profile "${HOME}/lsio" "${HOMEPAGE:-https://linuxserver.io}"

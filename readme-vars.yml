@@ -116,6 +116,7 @@ init_diagram: |
   "mullvad-browser:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "26.08.25:", desc: "Suppress sandbox security warning as it's misleading inside a container."}
   - {date: "12.07.25:", desc: "Rebase to Selkies, HTTPS IS NOW REQUIRED."}
   - {date: "28.08.24:", desc: "Rebase to noble."}
   - {date: "10.02.24:", desc: "Update Readme with new env vars and ingest proper PWA icon."}

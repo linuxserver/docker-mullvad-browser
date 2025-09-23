@@ -29,9 +29,6 @@ cap_add_param_vars:
 opt_param_usage_include_env: true
 opt_param_env_vars:
   - {env_var: "LOCAL_NET", env_value: "192.168.0.0/16", desc: "If using a VPN, set this to your local LAN IP range using CIDR notation. Without it you will be unable to access the web interface. If you have multiple ranges or a complex LAN setup you will need to manage this yourself in the wg0.conf, see the App Setup section for details."}
-opt_security_opt_param: true
-opt_security_opt_param_vars:
-  - {run_var: "seccomp=unconfined", compose_var: "seccomp:unconfined", desc: "For Docker Engine only, many modern gui apps need this to function on older hosts as syscalls are unknown to Docker."}
 # Selkies blurb settings
 selkies_blurb: true
 show_nvidia: true
@@ -40,7 +37,6 @@ app_setup_block_enabled: true
 app_setup_block: |
   The application can be accessed at:
 
-  * http://yourhost:3000/
   * https://yourhost:3001/
 # init diagram
 init_diagram: |

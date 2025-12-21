@@ -577,6 +577,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **20.12.25:** - Add Wayland init logic.
 * **26.08.25:** - Suppress sandbox security warning as it's misleading inside a container.
 * **12.07.25:** - Rebase to Selkies, HTTPS IS NOW REQUIRED.
 * **28.08.24:** - Rebase to noble.

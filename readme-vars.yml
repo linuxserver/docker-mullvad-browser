@@ -114,6 +114,7 @@ init_diagram: |
   "mullvad-browser:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "20.12.25:", desc: "Add Wayland init logic."}
   - {date: "26.08.25:", desc: "Suppress sandbox security warning as it's misleading inside a container."}
   - {date: "12.07.25:", desc: "Rebase to Selkies, HTTPS IS NOW REQUIRED."}
   - {date: "28.08.24:", desc: "Rebase to noble."}

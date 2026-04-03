@@ -114,6 +114,7 @@ init_diagram: |
   "mullvad-browser:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "03.04.26:", desc: "Make Wayland default disable with PIXELFLUX_WAYLAND=false."}
   - {date: "20.12.25:", desc: "Add Wayland init logic."}
   - {date: "26.08.25:", desc: "Suppress sandbox security warning as it's misleading inside a container."}
   - {date: "12.07.25:", desc: "Rebase to Selkies, HTTPS IS NOW REQUIRED."}

@@ -769,7 +769,7 @@ liblocale-gettext-perl                                                        1.
 liblsan0                                                                      16-20260322-1ubuntu1                   deb                         
 libltdl7                                                                      2.5.4-9                                deb                         
 liblz4-1                                                                      1.10.0-8                               deb                         
-liblzma5                                                                      5.8.3-1                                deb                         
+liblzma5                                                                      5.8.3-1ubuntu0.1                       deb                         
 libmagic-mgc                                                                  1:5.46-5build2                         deb                         
 libmagic1t64                                                                  1:5.46-5build2                         deb                         
 libmd0                                                                        1.1.0-2build4                          deb                         
@@ -1197,7 +1197,7 @@ xterm                                                                         40
 xutils                                                                        1:7.7+26ubuntu1                        deb                         
 xvfb                                                                          2:21.1.22-1ubuntu1.2                   deb                         
 xwayland                                                                      2:24.1.10-1                            deb                         
-xz-utils                                                                      5.8.3-1                                deb                         
+xz-utils                                                                      5.8.3-1ubuntu0.1                       deb                         
 yarl                                                                          1.25.1                                 python                      
 zipp                                                                          3.19.2                                 python                      
 zipp                                                                          3.23.0                                 python                      
